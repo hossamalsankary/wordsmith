@@ -1,0 +1,42 @@
+# task 
+# create Docker compose file 
+
+# you need to create 3 service 
+
+# db: image would be postgres:10.0-alpine  
+# the mount volumes would be 
+# ./db:/docker-entrypoint-initdb.d/
+
+# api: the backend and the with 3 replicas 
+
+# web  with port 8080:80
+
+services:
+  db:
+    image: postgres:10.0-alpine
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+  
+  api:
+    build: api
+    # image: dockersamples/wordsmith-api
+    deploy:
+      replicas: 5
+    depends_on:
+      - db
+    networks:
+      - main
+
+  web:
+    build: web
+    # image: dockersamples/wordsmith-web
+    ports:
+     - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - main
+  
+networks:
+  main:
+  
