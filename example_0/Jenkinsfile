@@ -13,18 +13,19 @@ pipeline {
     stage("install dependencies") {
 
       steps {
+        dir("./app") {
         sh 'pwd'
         sh 'npm install'
-
+         }
       }
 
     }
     stage("Test") {
 
       steps {
-
+      dir("./app") {
         sh 'npm run  test:unit'
-
+      }
       }
 
     }
@@ -32,8 +33,9 @@ pipeline {
     stage("Build") {
 
       steps {
-
+      dir("./app") {
         sh 'npm run build'
+       }
       }
 
     }
