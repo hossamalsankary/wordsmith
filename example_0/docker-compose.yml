@@ -1,0 +1,13 @@
+version: "3"
+services:
+  server:
+    container_name: 'server'
+    build: ./
+    ports:
+      - '5000:3000' 
+    networks:
+      - amazonapp
+
+networks:
+  amazonapp:
+      name: "amazon"
