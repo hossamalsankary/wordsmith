@@ -2,7 +2,7 @@
 pipeline {
   agent {
         docker {
-            image 'node:16-alpine' // Specify the Docker image you want to use
+            image 'node:lts-buster-slim' // Specify the Docker image you want to use
             args '-v /var/run/docker.sock:/var/run/docker.sock' 
         }
   }
@@ -24,7 +24,7 @@ pipeline {
 
       steps {
       dir("./example_0") {
-        sh 'npm run  test:unit'
+        sh 'npm run  test'
       }
       }
 
